@@ -1,0 +1,17 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <a href="{% url 'listen' %}">&#8592; zurück</a>
+</div>
+
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        <p>Sind Sie sicher? <b>"{{liste}}"</b> </p>
+        <input class="button" type="submit" value="löschen" />
+    </form>
+</div>
+
+
+{% endblock content %}

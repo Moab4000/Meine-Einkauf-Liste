@@ -1,0 +1,52 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+    <div class="header-bar">
+        <div>
+            <h1>Hallo {{request.user}}</h1>
+        </div>    
+
+        <a href="{% url 'teilen' %}">Teilen</a>
+
+        <a href="{% url 'ausloggen' %}">Ausloggen</a>
+      
+
+        
+    </div>
+
+    <div id="search-add-wrapper">
+        <form method="GET" style="display: flex;">
+            <input type='text' name='search-area' placeholder=" " value="{{search_input}}">
+            <input class="button" type="submit" value='Suchen'>
+        </form>
+        {% if listen|length > 0 %}
+        <a id="add-link" href="{% url 'liste-erstellung' %}">&#x2b;</a>
+        {% endif %}
+    </div>
+
+   
+
+    
+    <center>
+        <table>
+            {% for liste in listen %}
+                 <tr>
+                    <td>{{liste.title}}</td>
+                    <td>&#160&#160&#160&#160</td>
+                    <td>{{liste.rate}}</td>
+                    <td><p>Euro</p></td>
+                    <td>&#160&#160&#160&#160</td>
+                    <td>&#160&#160&#160&#160</td>
+                    <td><a id="edit-link" href="{% url 'liste-update' liste.id %}">&#x270E;</a></td>    
+                    <td><a id="delete-link" href="{% url 'liste-delete' liste.id %}">&#x58;</a></td>    
+                    
+                </tr>
+
+            {% empty %}
+                <td></td>
+                <h3>Keine Liste verfügbar</h3>
+                <h3>Erstellen Sie eine <a style="text-decoration: none; color: #3541e5;" href="{% url 'liste-erstellung' %}">neue Liste</a> ! </h3>
+            {% endfor %}
+        </table>
+    </center>    
+{% endblock content %}
